@@ -25,6 +25,7 @@ has_many :grades
 
 
 
+
 ## goals
 Column       | Type        | Options           |
 | ---------- | ----------- | ----------------- |
