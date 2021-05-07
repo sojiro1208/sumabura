@@ -3,63 +3,59 @@
 ## users
  Column              | Type    | Options                   |
 | ------------------ | ------- | ------------------------- |
-| nickname           | string  | null: false               |
+| name               | string  | null: false               |
 | email              | string  | null: false ,unique: true |
-| password           | string  | null: false               |
+| encrypted_password | string  | null: false               |
 
 ### Association
 has_many :partners
 
 
+
 ## partners
- Column           | Type       | Options            |
-| --------------- | ---------- | ------------------ |
-| name            | string     | null: false        |
-| user            | references | foreign_key: true  |
+ Column              | Type        | Options                   |
+| ------------------ | ----------- | ------------------------- |
+| character          | string      | null: false               |
+| user               | references  | foreign_key: true         |
 
 ### Association
-belongs_to :user
+has_many :battles
 has_many :goals
-has_many :grades
+belongs_to :user
 
 
+
+## battles
+ Column              | Type        | Options                   |
+| ------------------ | ----------- | ------------------------- |
+| game               | date        | null: false               |
+| win                | date        | null: false               |
+| lose               | date        | null: false               |
+| rate               | date        | null: false               |
+| partner            | references  | foreign_key: true         |
+
+### Association
+has_many :reflections
+belongs_to :partner
 
 
 
 ## goals
-Column       | Type        | Options           |
-| ---------- | ----------- | ----------------- |
-| task       | text        | null: false       |
+ Column              | Type        | Options                   |
+| ------------------ | ----------- | ------------------------- |
+| task               | text        | null: false               |
+| partner            | references  | foreign_key: true         |
 
 ### Association
 belongs_to :partner
 
 
 
-
-## grades
- Column              | Type       | Options           |
-| ------------------ | ---------- | ----------------- |
-| game               | date       | null: false       |
-| win                | date       | null: false       |
-| lose               |  date      | null: false       |
-| rate               | date       | null: false       |
-| partner            | references | foreign_key: true |
-
+## reflections
+ Column              | Type        | Options                   |
+| ------------------ | ----------- | ------------------------- |
+| comment            | text        | null: false               |
+| partner            | references  | foreign_key: true         |
 
 ### Association
-belongs_to :partner
-has_many :comments
-
-
-
-## comments
- Column              | Type       | Options                   |
-| ------------------ | ---------- | ------------------------- |
-| comment            | text       | null: false               |
-| grades             | references | foreign_key: true         |
-| user               | references | foreign_key: true         |
-
-### Association
-belongs_to :grade
-
+belongs_to :battle
